@@ -1,7 +1,8 @@
 import axios from "axios";
+import Env from "../config/env";
 
 const Request = axios.create({
-  baseURL: process.env.EXPO_PUBLIC_WHITELABEL_API_URL,
+  baseURL: Env.EXPO_PUBLIC_API_URL,
   timeout: 5000,
 });
 
