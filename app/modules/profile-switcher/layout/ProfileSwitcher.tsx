@@ -1,16 +1,46 @@
-import { Button, ButtonText, Text } from "@gluestack-ui/themed";
-import Screen from "../../../shared/layout/components/screen";
-import { useNavigate } from "../../../shared/navigation/hooks/useNavigate";
+import { Box, Text } from "@gluestack-ui/themed";
+import { FlatList } from "react-native";
+import Screen from "../../../shared/layout/components/Screen";
+import Title from "../../../shared/layout/components/Title";
+import { useUsers } from "../../user/hooks/useUsers";
+import UserCard from "../../user/layout/components/UserCard";
+import { useProfileSwitcherStore } from "../state/useProfileSwitcherStore";
 
 function ProfileSwitcher() {
-  const { goBack } = useNavigate();
+  const currentUser = useProfileSwitcherStore(state => state.currentUser);
+  const signInUser = useProfileSwitcherStore(state => state.signInUser);
+
+  const { users, isLoading } = useUsers();
 
   return (
     <Screen>
-      <Text>Profile Switcher</Text>
-      <Button onPress={goBack}>
-        <ButtonText>Select profile</ButtonText>
-      </Button>
+      <Box p={"$4"} alignItems="center">
+        <Title>Choose your profile</Title>
+
+        <Box mt={"$8"} width={"$full"} height="$full">
+          {isLoading && <Text>...Loading</Text>}
+
+          {users && users?.length > 0 ? (
+            <FlatList
+              contentContainerStyle={{ gap: 16 }}
+              data={users}
+              renderItem={({ item: user }) => (
+                <UserCard.Card
+                  onPress={() => {
+                    if (!currentUser) {
+                      signInUser(user);
+                    }
+                  }}
+                  states={{ checked: currentUser?.id === user.id }}
+                >
+                  <UserCard.Title>{user.name}</UserCard.Title>
+                  <UserCard.Description>{user.email}</UserCard.Description>
+                </UserCard.Card>
+              )}
+            />
+          ) : null}
+        </Box>
+      </Box>
     </Screen>
   );
 }
