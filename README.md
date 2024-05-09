@@ -9,11 +9,11 @@ npm install
 ### Running
 
 ```bash
-npm android
+npm run android
 ```
 
 or
 
 ```bash
-npm ios
+npm run ios
 ```
