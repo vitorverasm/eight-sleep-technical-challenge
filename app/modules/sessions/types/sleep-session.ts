@@ -26,7 +26,7 @@ export const SleepSessionSchema = z.object({
   /**
    * Collection of timeseries data
    */
-  timeSeries: TimeSeriesSchema,
+  timeseries: TimeSeriesSchema,
 });
 
 export type SleepSession = z.infer<typeof SleepSessionSchema>;
