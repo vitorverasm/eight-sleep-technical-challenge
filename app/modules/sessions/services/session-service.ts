@@ -7,11 +7,14 @@ import {
 } from "../types/session-service";
 
 export async function getSessionsByUserId(params: GetSessionsByUserIdParams) {
-  const { userId } = GetSessionsByUserIdParamsSchema.parse(params);
+  const paramsParse = GetSessionsByUserIdParamsSchema.safeParse(params);
+  if (paramsParse.success) {
+    const { userId } = paramsParse.data;
 
-  const { data } = await Request.get<GetSessionsByUserIdResponse>(
-    `/${userId}.json`,
-  );
+    const { data } = await Request.get<GetSessionsByUserIdResponse>(
+      `/${userId}.json`,
+    );
 
-  return GetSessionsByUserIdResponseSchema.parse(data);
+    return GetSessionsByUserIdResponseSchema.parse(data).intervals;
+  }
 }

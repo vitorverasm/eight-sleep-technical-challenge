@@ -2,9 +2,7 @@ import { z } from "zod";
 import { SleepSessionSchema } from "./sleep-session";
 
 export const GetSessionsByUserIdParamsSchema = z.object({
-  userId: z.string({
-    required_error: "userId is required",
-  }),
+  userId: z.string({}).optional(),
 });
 
 export const GetSessionsByUserIdResponseSchema = z.object({
