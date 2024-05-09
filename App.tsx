@@ -1,10 +1,15 @@
-import Home from "./app/home";
+import "react-native-gesture-handler";
+
+import { NavigationContainer } from "@react-navigation/native";
 import ThemeProvider from "./app/shared/layout/theme-provider";
+import Router from "./app/shared/navigation/Router";
 
 export default function App() {
   return (
     <ThemeProvider>
-      <Home />
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
     </ThemeProvider>
   );
 }
