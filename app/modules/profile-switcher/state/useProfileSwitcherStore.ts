@@ -1,7 +1,7 @@
-import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
 import type {} from "@redux-devtools/extension";
-import { User } from "../../user/types/user";
+import { create } from "zustand";
+import { devtools } from "zustand/middleware";
+import { User, UserSchema } from "../../user/types/user";
 
 interface ProfileSwitcherState {
   currentUser?: User;
@@ -11,15 +11,13 @@ interface ProfileSwitcherState {
 
 export const useProfileSwitcherStore = create<ProfileSwitcherState>()(
   devtools(
-    persist(
-      set => ({
-        currentUser: undefined,
-        signInUser: user => set({ currentUser: user }),
-        signOutUser: () => set({ currentUser: undefined }),
-      }),
-      {
-        name: "profile-switcher-store",
-      },
-    ),
+    set => ({
+      currentUser: undefined,
+      signInUser: user => set({ currentUser: UserSchema.parse(user) }),
+      signOutUser: () => set({ currentUser: undefined }),
+    }),
+    {
+      name: "profile-switcher-store",
+    },
   ),
 );
