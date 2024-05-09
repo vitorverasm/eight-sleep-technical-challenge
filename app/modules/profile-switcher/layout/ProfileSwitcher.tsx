@@ -4,11 +4,10 @@ import Screen from "../../../shared/layout/components/Screen";
 import Title from "../../../shared/layout/components/Title";
 import { useUsers } from "../../user/hooks/useUsers";
 import UserCard from "../../user/layout/components/UserCard";
-import { useProfileSwitcherStore } from "../state/useProfileSwitcherStore";
+import { useProfile } from "../hooks/useProfile";
 
 function ProfileSwitcher() {
-  const currentUser = useProfileSwitcherStore(state => state.currentUser);
-  const signInUser = useProfileSwitcherStore(state => state.signInUser);
+  const { currentUser, signInUser } = useProfile();
 
   const { users, isLoading } = useUsers();
 
