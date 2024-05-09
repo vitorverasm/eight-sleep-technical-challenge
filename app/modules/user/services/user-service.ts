@@ -1,10 +1,17 @@
-import { User } from "../types/user";
+import { z } from "zod";
 import Request from "../../../shared/services/request";
+import { UserSchema } from "../types/user";
 
-export async function getUsers(): Promise<User[]> {
-  const {
-    data: { users },
-  } = await Request.get<{ users: User[] }>("/users.json");
+const GetUsersResponseSchema = z.object({
+  users: UserSchema.array().nonempty({
+    message: "users array is empty",
+  }),
+});
 
-  return users;
+type GetUsersResponse = z.infer<typeof GetUsersResponseSchema>;
+
+export async function getUsers() {
+  const { data } = await Request.get<GetUsersResponse>("/users.json");
+
+  return GetUsersResponseSchema.parse(data).users;
 }
