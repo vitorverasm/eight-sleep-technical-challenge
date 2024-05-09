@@ -1,4 +1,4 @@
-import { Box } from "@gluestack-ui/themed";
+import { Box, Text } from "@gluestack-ui/themed";
 import React from "react";
 import Header from "../../../shared/layout/components/Header";
 import Screen from "../../../shared/layout/components/Screen";
@@ -16,7 +16,8 @@ function Home() {
         <Header.Title>Eight Sleep</Header.Title>
       </Header.Container>
       <Box p={"$8"}>
-        <Title>Hello, {currentUser?.name}</Title>
+        <Text>Hello, {currentUser?.name}</Text>
+        <Title>Sleep report</Title>
       </Box>
     </Screen>
   );
