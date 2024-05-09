@@ -1,14 +1,14 @@
-import { StyledProvider } from "@gluestack-style/react";
+import { config } from "@gluestack-ui/config";
+import { GluestackUIProvider } from "@gluestack-ui/themed";
 import { ReactNode } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { config } from "../../../gluestack-style.config";
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
   return (
     <SafeAreaProvider>
-      <StyledProvider config={config} colorMode="dark">
+      <GluestackUIProvider config={config} colorMode="dark">
         {children}
-      </StyledProvider>
+      </GluestackUIProvider>
     </SafeAreaProvider>
   );
 };
