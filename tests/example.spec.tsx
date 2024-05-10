@@ -6,7 +6,7 @@ import {
 } from "@gluestack-ui/themed";
 import { render, screen, userEvent } from "@testing-library/react-native";
 import { Text, TouchableOpacity } from "react-native";
-import { TestWrapper } from "../app/shared/tests/TestWrapper";
+import { TestWrapper } from "../app/shared/tests/mocks/TestWrapper";
 
 const TestComponent = ({ onPress }: { onPress: () => void }) => {
   return (
