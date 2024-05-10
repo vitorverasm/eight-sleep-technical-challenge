@@ -1,11 +1,12 @@
-import { render, screen, userEvent } from "@testing-library/react-native";
-import { Text, TouchableOpacity } from "react-native";
 import {
-  Text as ThemedText,
+  Box,
   Button,
   ButtonText,
-  Box,
+  Text as ThemedText,
 } from "@gluestack-ui/themed";
+import { render, screen, userEvent } from "@testing-library/react-native";
+import { Text, TouchableOpacity } from "react-native";
+import { TestWrapper } from "../app/shared/tests/TestWrapper";
 
 const TestComponent = ({ onPress }: { onPress: () => void }) => {
   return (
@@ -47,7 +48,11 @@ describe("Example of unit testing in RN", () => {
     const onSubmit = jest.fn();
 
     const user = userEvent.setup();
-    render(<ThemedTestComponent onPress={onSubmit} />);
+    render(
+      <TestWrapper>
+        <ThemedTestComponent onPress={onSubmit} />
+      </TestWrapper>,
+    );
 
     await user.press(screen.getByTestId("themed-button-1"));
 
