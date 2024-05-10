@@ -23,7 +23,7 @@ function Home() {
         <Header.Title>Eight Sleep</Header.Title>
       </Header.Container>
       <Box p={"$8"}>
-        <Text>Hello {currentUser?.name},</Text>
+        <Text testID="home-greetings">Hello {currentUser?.name},</Text>
         <Title>Sleep report</Title>
       </Box>
     </Screen>
