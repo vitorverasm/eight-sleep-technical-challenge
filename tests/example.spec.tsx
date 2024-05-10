@@ -1,5 +1,11 @@
 import { render, screen, userEvent } from "@testing-library/react-native";
 import { Text, TouchableOpacity } from "react-native";
+import {
+  Text as ThemedText,
+  Button,
+  ButtonText,
+  Box,
+} from "@gluestack-ui/themed";
 
 const TestComponent = ({ onPress }: { onPress: () => void }) => {
   return (
@@ -9,15 +15,43 @@ const TestComponent = ({ onPress }: { onPress: () => void }) => {
   );
 };
 
-test("Example of unit testing in RN", async () => {
-  jest.useFakeTimers();
+const ThemedTestComponent = ({ onPress }: { onPress: () => void }) => {
+  return (
+    <Box>
+      <ThemedText>Test</ThemedText>
+      <Button onPress={onPress} testID="themed-button-1">
+        <ButtonText>Press me</ButtonText>
+      </Button>
+    </Box>
+  );
+};
 
-  const onSubmit = jest.fn();
+describe("Example of unit testing in RN", () => {
+  it("should find text and press button", async () => {
+    jest.useFakeTimers();
 
-  const user = userEvent.setup();
-  render(<TestComponent onPress={onSubmit} />);
+    const onSubmit = jest.fn();
 
-  await user.press(screen.getByTestId("button-1"));
+    const user = userEvent.setup();
+    render(<TestComponent onPress={onSubmit} />);
 
-  expect(screen.getByText("Test")).toBeDefined();
+    await user.press(screen.getByTestId("button-1"));
+
+    expect(screen.getByText("Test")).toBeDefined();
+    expect(onSubmit).toHaveBeenCalled();
+  });
+
+  it("should render themed component", async () => {
+    jest.useFakeTimers();
+
+    const onSubmit = jest.fn();
+
+    const user = userEvent.setup();
+    render(<ThemedTestComponent onPress={onSubmit} />);
+
+    await user.press(screen.getByTestId("themed-button-1"));
+
+    expect(screen.getByText("Test")).toBeDefined();
+    expect(onSubmit).toHaveBeenCalled();
+  });
 });
