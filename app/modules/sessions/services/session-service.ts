@@ -1,4 +1,4 @@
-import Request from "../../../shared/services/request";
+import Env from "../../../shared/config/env";
 import {
   GetSessionsByUserIdParams,
   GetSessionsByUserIdParamsSchema,
@@ -11,9 +11,10 @@ export async function getSessionsByUserId(params: GetSessionsByUserIdParams) {
   if (paramsParse.success) {
     const { userId } = paramsParse.data;
 
-    const { data } = await Request.get<GetSessionsByUserIdResponse>(
-      `/${userId}.json`,
-    );
+    const response = await fetch(`${Env.EXPO_PUBLIC_API_URL}/${userId}.json`, {
+      method: "GET",
+    });
+    const data = (await response.json()) as GetSessionsByUserIdResponse;
 
     return GetSessionsByUserIdResponseSchema.parse(data).intervals;
   }
