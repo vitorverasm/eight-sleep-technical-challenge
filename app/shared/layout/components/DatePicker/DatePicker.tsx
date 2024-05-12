@@ -7,6 +7,7 @@ import Popover from "./components/Popover";
 import PreviousDayButton from "./components/PreviousDayButton";
 import { useDatePicker } from "./hooks/useDatePicker";
 import { DatePickerProps } from "./types/DatePicker.type";
+import { Platform } from "react-native";
 
 export function DatePicker({
   currentDate,
@@ -57,12 +58,14 @@ export function DatePicker({
           <Popover.Body>
             <HStack mt="$4" alignItems="center" justifyContent="center">
               <Text size="md">Select date:</Text>
-              <DateTimePicker
-                testID="custom-date-picker"
-                value={value}
-                mode={"date"}
-                onChange={onPickCustomDate}
-              />
+              {Platform.OS === "ios" ? (
+                <DateTimePicker
+                  testID="custom-date-picker"
+                  value={value}
+                  mode={"date"}
+                  onChange={onPickCustomDate}
+                />
+              ) : null}
             </HStack>
           </Popover.Body>
           <Popover.Footer
