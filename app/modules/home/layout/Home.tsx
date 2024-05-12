@@ -7,6 +7,7 @@ import Title from "../../../shared/layout/components/Title";
 import { useProfile } from "../../profile-switcher/hooks/useProfile";
 import { useSelectedSession } from "../../sessions/hooks/useSelectedSession";
 import { useSessions } from "../../sessions/hooks/useSessions";
+import { EmptyData } from "../../sessions/layout/components/EmptyData";
 
 function Home() {
   const { currentUser, signOutUser } = useProfile();
@@ -34,7 +35,7 @@ function Home() {
           />
         </Box>
         <Box pt="$5">
-          {sessionData ? <Text>Tem dados</Text> : <Text>sem dados</Text>}
+          {sessionData ? <Text>Tem dados</Text> : <EmptyData />}
         </Box>
       </Box>
     </Screen>
