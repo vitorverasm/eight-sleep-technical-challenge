@@ -2,7 +2,7 @@ import { z } from "zod";
 import { SleepSessionSchema } from "./sleep-session";
 
 export const GetSessionsByUserIdParamsSchema = z.object({
-  userId: z.string({}),
+  userId: z.string({}).optional(),
 });
 
 export const GetSessionsByUserIdResponseSchema = z.object({
