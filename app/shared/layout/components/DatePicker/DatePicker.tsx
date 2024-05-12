@@ -1,25 +1,12 @@
-import { Box, HStack, Text, styled } from "@gluestack-ui/themed";
+import { Box, HStack, Text } from "@gluestack-ui/themed";
 import DateTimePicker, {
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
 import { useCallback, useState } from "react";
-import { TouchableOpacity } from "react-native";
+import DateDisplay from "./DateDisplay";
 import NextDayButton from "./NextDayButton";
 import PopoverWrapper from "./PopoverWrapper";
 import PreviousDayButton from "./PreviousDayButton";
-
-const PickDateButton = styled(TouchableOpacity, {
-  px: "$2",
-  py: "$2",
-  borderRadius: "$md",
-  w: "$full",
-  alignItems: "center",
-  ":checked": {
-    bg: "$backgroundDark950",
-    borderBottomStartRadius: 0,
-    borderBottomEndRadius: 0,
-  },
-});
 
 type DatePickerProps = {
   currentDate: Date;
@@ -71,24 +58,14 @@ export function DatePicker({ currentDate, onDateChange }: DatePickerProps) {
           popoverWidth={pickDateButtonWidth}
           trigger={triggerProps => {
             return (
-              <PickDateButton
+              <DateDisplay
                 {...triggerProps}
-                states={{ checked: showDatePicker }}
-                testID="pick-date-button"
-                onLayout={event => {
-                  const { width } = event.nativeEvent.layout;
+                isChecked={showDatePicker}
+                date={internalDate}
+                notifyCurrentWidth={width => {
                   setPickDateButtonWidth(width);
                 }}
-              >
-                <Text fontSize={16} fontWeight={"$bold"}>
-                  {internalDate.toLocaleDateString("en-us", {
-                    weekday: "short",
-                    year: "numeric",
-                    month: "short",
-                    day: "numeric",
-                  })}
-                </Text>
-              </PickDateButton>
+              />
             );
           }}
         >
