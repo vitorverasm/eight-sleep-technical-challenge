@@ -71,8 +71,14 @@ export function DatePicker({
               value.toDateString() === latestSessionDate.toDateString()
             }
             hideToday={value.toDateString() === new Date().toDateString()}
-            onPressLatestSession={onPressLatestSession}
-            onPressToday={onPressToday}
+            onPressLatestSession={() => {
+              onPressLatestSession();
+              closeCustomDatePicker();
+            }}
+            onPressToday={() => {
+              onPressToday();
+              closeCustomDatePicker();
+            }}
           />
         </Popover.Wrapper>
       </Box>
