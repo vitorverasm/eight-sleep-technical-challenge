@@ -1,4 +1,5 @@
 import {
+  Box,
   ButtonGroup,
   Popover as GPopover,
   PopoverBackdrop,
@@ -9,6 +10,8 @@ import {
 } from "@gluestack-ui/themed";
 import Button from "../../Button";
 import { Text } from "@gluestack-ui/themed";
+import React from "react";
+import { View } from "react-native";
 
 const CustomPopoverContent = styled(PopoverContent, {
   bg: "$backgroundDark950",
@@ -97,8 +100,21 @@ function Wrapper({
   );
 }
 
+function Trigger(
+  props: { children: React.ReactNode },
+  ref: React.ForwardedRef<any>,
+) {
+  const { children } = props;
+  return (
+    <Box ref={ref} w="$full">
+      {children}
+    </Box>
+  );
+}
+
 export default {
   Wrapper,
   Footer,
   Body,
+  Trigger: React.forwardRef(Trigger),
 };

@@ -41,14 +41,16 @@ export function DatePicker({
           popoverWidth={pickDateButtonWidth}
           trigger={triggerProps => {
             return (
-              <DateDisplay
-                {...triggerProps}
-                isChecked={datePickerVisible}
-                date={value}
-                notifyCurrentWidth={width => {
-                  setPickDateButtonWidth(width);
-                }}
-              />
+              <Popover.Trigger {...triggerProps}>
+                <DateDisplay
+                  isChecked={datePickerVisible}
+                  date={value}
+                  notifyCurrentWidth={width => {
+                    setPickDateButtonWidth(width);
+                  }}
+                  onPress={openCustomDatePicker}
+                />
+              </Popover.Trigger>
             );
           }}
         >
