@@ -5,7 +5,7 @@ import DateTimePicker, {
 import { useCallback, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import NextDayButton from "./NextDayButton";
-import Popover from "./Popover";
+import PopoverWrapper from "./PopoverWrapper";
 import PreviousDayButton from "./PreviousDayButton";
 
 const PickDateButton = styled(TouchableOpacity, {
@@ -64,7 +64,7 @@ export function DatePicker({ currentDate, onDateChange }: DatePickerProps) {
     <HStack w={"$full"} p="$0.5" alignItems="center">
       <PreviousDayButton onPress={goToPreviousDay} />
       <Box flex={5} alignItems="center">
-        <Popover
+        <PopoverWrapper
           isOpen={showDatePicker}
           onClose={closeCustomDatePicker}
           onOpen={openCustomDatePicker}
@@ -101,7 +101,7 @@ export function DatePicker({ currentDate, onDateChange }: DatePickerProps) {
               onChange={onPickCustomDate}
             />
           </HStack>
-        </Popover>
+        </PopoverWrapper>
       </Box>
       <NextDayButton onPress={goToNextDay} />
     </HStack>

@@ -27,7 +27,7 @@ type PopoverProps = {
   children?: React.ReactNode;
 };
 
-export default function Popover({
+export default function PopoverWrapper({
   isOpen,
   onClose,
   onOpen,
