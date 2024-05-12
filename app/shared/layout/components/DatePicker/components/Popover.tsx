@@ -11,7 +11,6 @@ import {
 import Button from "../../Button";
 import { Text } from "@gluestack-ui/themed";
 import React from "react";
-import { View } from "react-native";
 
 const CustomPopoverContent = styled(PopoverContent, {
   bg: "$backgroundDark950",
