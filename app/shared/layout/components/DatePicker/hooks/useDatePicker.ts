@@ -1,5 +1,9 @@
-import { DateTimePickerEvent } from "@react-native-community/datetimepicker";
+import {
+  DateTimePickerAndroid,
+  DateTimePickerEvent,
+} from "@react-native-community/datetimepicker";
 import { useCallback, useState } from "react";
+import { Platform } from "react-native";
 import { DatePickerProps } from "../types/DatePicker.type";
 
 export function useDatePicker({
@@ -23,8 +27,6 @@ export function useDatePicker({
     setInternalDate(newDate);
     onDateChange(newDate);
   }, [internalDate, onDateChange]);
-
-  const openCustomDatePicker = () => setShowDatePicker(true);
 
   const closeCustomDatePicker = () => setShowDatePicker(false);
 
@@ -53,6 +55,18 @@ export function useDatePicker({
     setInternalDate(newDate);
     onDateChange(newDate);
   }, [onDateChange]);
+
+  const openCustomDatePicker = () => {
+    if (Platform.OS === "android") {
+      DateTimePickerAndroid.open({
+        value: internalDate,
+        onChange: onPickCustomDate,
+        mode: "date",
+      });
+    } else {
+      setShowDatePicker(true);
+    }
+  };
 
   return {
     value: internalDate,

@@ -1,4 +1,4 @@
-import { Text, styled } from "@gluestack-ui/themed";
+import { Button, ButtonText, Text, styled } from "@gluestack-ui/themed";
 import React from "react";
 import { TouchableOpacity } from "react-native";
 
@@ -7,6 +7,10 @@ type DateDisplayProps = {
   notifyCurrentWidth: (width: number) => void;
   date: Date;
   onPress?: () => void;
+};
+
+type DateDisplayAndroidProps = {
+  date: Date;
 };
 
 const PickDateButton = styled(TouchableOpacity, {
@@ -20,6 +24,14 @@ const PickDateButton = styled(TouchableOpacity, {
     borderBottomStartRadius: 0,
     borderBottomEndRadius: 0,
   },
+});
+
+const PickDateButtonAndroid = styled(Button, {
+  px: "$2",
+  py: "$2",
+  borderRadius: "$md",
+  w: "$full",
+  alignItems: "center",
 });
 
 function DateDisplay({
@@ -49,5 +61,36 @@ function DateDisplay({
     </PickDateButton>
   );
 }
+
+export const DateDisplayAndroid = React.forwardRef(
+  function DateDisplayAndroidComponent(
+    props: DateDisplayAndroidProps,
+    ref: React.ForwardedRef<any>,
+  ) {
+    const { date } = props;
+    return (
+      <PickDateButtonAndroid
+        {...props}
+        variant="link"
+        testID="pick-date-button"
+        ref={ref}
+      >
+        <ButtonText
+          fontSize={16}
+          fontWeight={"$bold"}
+          textDecorationLine="none"
+          color="white"
+        >
+          {date.toLocaleDateString("en-us", {
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </ButtonText>
+      </PickDateButtonAndroid>
+    );
+  },
+);
 
 export default DateDisplay;

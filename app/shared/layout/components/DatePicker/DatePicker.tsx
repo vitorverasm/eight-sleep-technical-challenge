@@ -1,13 +1,20 @@
-import { Box, HStack, Text } from "@gluestack-ui/themed";
+import {
+  Box,
+  HStack,
+  Menu,
+  MenuItem,
+  MenuItemLabel,
+  Text,
+} from "@gluestack-ui/themed";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { useState } from "react";
-import DateDisplay from "./components/DateDisplay";
+import { useMemo, useState } from "react";
+import { Platform } from "react-native";
+import DateDisplay, { DateDisplayAndroid } from "./components/DateDisplay";
 import NextDayButton from "./components/NextDayButton";
 import Popover from "./components/Popover";
 import PreviousDayButton from "./components/PreviousDayButton";
 import { useDatePicker } from "./hooks/useDatePicker";
 import { DatePickerProps } from "./types/DatePicker.type";
-import { Platform } from "react-native";
 
 export function DatePicker({
   currentDate,
@@ -30,6 +37,57 @@ export function DatePicker({
     onDateChange,
     latestSessionDate,
   });
+
+  const hideLatestSession = useMemo(
+    () =>
+      !latestSessionDate ||
+      value.toDateString() === latestSessionDate.toDateString(),
+    [latestSessionDate, value],
+  );
+
+  const hideToday = useMemo(
+    () => value.toDateString() === new Date().toDateString(),
+    [value],
+  );
+
+  if (Platform.OS === "android") {
+    return (
+      <HStack w={"$full"} p="$0.5" alignItems="center">
+        <PreviousDayButton onPress={goToPreviousDay} />
+        <Box flex={5} alignItems="center">
+          <Menu
+            placement="bottom"
+            trigger={({ ...triggerProps }) => {
+              return <DateDisplayAndroid {...triggerProps} date={value} />;
+            }}
+          >
+            <MenuItem
+              key="PickCustomDate"
+              textValue="Pick a date"
+              onPress={openCustomDatePicker}
+            >
+              <MenuItemLabel>Pick a date</MenuItemLabel>
+            </MenuItem>
+            {hideLatestSession ? null : (
+              <MenuItem
+                key="Latest"
+                textValue="Latest session"
+                onPress={onPressLatestSession}
+              >
+                <MenuItemLabel>Latest session</MenuItemLabel>
+              </MenuItem>
+            )}
+            {hideToday ? null : (
+              <MenuItem key="Today" textValue="Today" onPress={onPressToday}>
+                <MenuItemLabel>Today</MenuItemLabel>
+              </MenuItem>
+            )}
+          </Menu>
+        </Box>
+        <NextDayButton onPress={goToNextDay} />
+      </HStack>
+    );
+  }
 
   return (
     <HStack w={"$full"} p="$0.5" alignItems="center">
@@ -69,11 +127,8 @@ export function DatePicker({
             </HStack>
           </Popover.Body>
           <Popover.Footer
-            hideLatestSession={
-              !latestSessionDate ||
-              value.toDateString() === latestSessionDate.toDateString()
-            }
-            hideToday={value.toDateString() === new Date().toDateString()}
+            hideLatestSession={hideLatestSession}
+            hideToday={hideToday}
             onPressLatestSession={() => {
               onPressLatestSession();
               closeCustomDatePicker();
