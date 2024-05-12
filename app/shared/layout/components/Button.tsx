@@ -7,10 +7,6 @@ import { ComponentProps, useMemo, useState } from "react";
 
 const ButtonContainer = styled(GButton, {
   backgroundColor: "#246AFF",
-  height: 54,
-  width: "$full",
-  py: "$3",
-  px: "$12",
   ":active": {
     backgroundColor: "#0049e6",
   },
@@ -23,7 +19,7 @@ const ButtonContainer = styled(GButton, {
 });
 
 const Text = styled(GButtonText, {
-  fontSize: "$md",
+  fontSize: "$sm",
 });
 
 const Container = (props: ComponentProps<typeof ButtonContainer>) => {
