@@ -8,6 +8,7 @@ import { useProfile } from "../../profile-switcher/hooks/useProfile";
 import { useSelectedSession } from "../../sessions/hooks/useSelectedSession";
 import { useSessions } from "../../sessions/hooks/useSessions";
 import { EmptyData } from "../../sessions/layout/components/EmptyData";
+import Metrics from "../../sessions/layout/components/Metrics/Metrics";
 
 function Home() {
   const { currentUser, signOutUser } = useProfile();
@@ -35,7 +36,13 @@ function Home() {
           />
         </Box>
         <Box pt="$5">
-          {sessionData ? <Text>Tem dados</Text> : <EmptyData />}
+          {sessionData ? (
+            <Metrics.Wrapper>
+              <Metrics.SleepScore score={sessionData.score} />
+            </Metrics.Wrapper>
+          ) : (
+            <EmptyData />
+          )}
         </Box>
       </Box>
     </Screen>
