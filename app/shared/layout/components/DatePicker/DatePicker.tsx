@@ -3,7 +3,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import DateDisplay from "./DateDisplay";
 import NextDayButton from "./NextDayButton";
-import Popover from "./PopoverWrapper";
+import Popover from "./Popover";
 import PreviousDayButton from "./PreviousDayButton";
 import { useDatePicker } from "./hooks/useDatePicker";
 import { DatePickerProps } from "./types/DatePicker.type";
