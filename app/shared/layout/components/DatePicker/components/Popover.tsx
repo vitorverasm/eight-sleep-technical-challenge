@@ -7,7 +7,7 @@ import {
   PopoverFooter,
   styled,
 } from "@gluestack-ui/themed";
-import Button from "../Button";
+import Button from "../../Button";
 import { Text } from "@gluestack-ui/themed";
 
 const CustomPopoverContent = styled(PopoverContent, {

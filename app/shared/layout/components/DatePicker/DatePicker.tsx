@@ -1,10 +1,10 @@
 import { Box, HStack, Text } from "@gluestack-ui/themed";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useState } from "react";
-import DateDisplay from "./DateDisplay";
-import NextDayButton from "./NextDayButton";
-import Popover from "./Popover";
-import PreviousDayButton from "./PreviousDayButton";
+import DateDisplay from "./components/DateDisplay";
+import NextDayButton from "./components/NextDayButton";
+import Popover from "./components/Popover";
+import PreviousDayButton from "./components/PreviousDayButton";
 import { useDatePicker } from "./hooks/useDatePicker";
 import { DatePickerProps } from "./types/DatePicker.type";
 
