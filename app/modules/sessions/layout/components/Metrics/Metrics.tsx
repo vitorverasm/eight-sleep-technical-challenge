@@ -15,11 +15,11 @@ function Card({ children }: { children: React.ReactNode }) {
   );
 }
 
-function SleepScore({ score }: { score: SleepSession["score"] }) {
+function SleepFitness({ score }: { score: SleepSession["score"] }) {
   return (
     <Card>
       <Heading mb="$1" size="md">
-        Sleep Score
+        Sleep Fitness
       </Heading>
       <Text size="sm">{score}%</Text>
     </Card>
@@ -28,5 +28,5 @@ function SleepScore({ score }: { score: SleepSession["score"] }) {
 
 export default {
   Wrapper,
-  SleepScore,
+  SleepFitness,
 };

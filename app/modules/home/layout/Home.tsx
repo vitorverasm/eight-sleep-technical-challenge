@@ -38,7 +38,7 @@ function Home() {
         <Box pt="$5">
           {sessionData ? (
             <Metrics.Wrapper>
-              <Metrics.SleepScore score={sessionData.score} />
+              <Metrics.SleepFitness score={sessionData.score} />
             </Metrics.Wrapper>
           ) : (
             <EmptyData />
