@@ -12,7 +12,7 @@ import { GestureResponderEvent } from "react-native";
 const HeaderContainer = styled(Box, {
   height: 56,
   py: "$3",
-  px: "$5",
+  px: "$2",
   flexDirection: "row",
   alignItems: "center",
   gap: "$4",
