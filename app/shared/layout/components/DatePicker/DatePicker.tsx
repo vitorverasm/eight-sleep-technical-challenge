@@ -44,6 +44,7 @@ export function DatePicker({ currentDate, onDateChange }: DatePickerProps) {
       const newCustomDate = selectedDate;
       setShowDatePicker(false);
       setInternalDate(newCustomDate);
+      onDateChange(newCustomDate);
     }
   };
 
