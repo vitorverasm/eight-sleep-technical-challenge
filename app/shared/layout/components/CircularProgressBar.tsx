@@ -1,7 +1,10 @@
+import { Box } from "@gluestack-ui/themed";
 import { Canvas, Path, SkFont, Skia, Text } from "@shopify/react-native-skia";
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { SharedValue, useDerivedValue } from "react-native-reanimated";
+
+const deviceWidth = Dimensions.get("window").width;
 
 type Props = {
   strokeWidth: number;
@@ -20,6 +23,7 @@ const CircularProgressBar = ({
   font,
   subtitleFont,
 }: Props) => {
+  const x = (deviceWidth - 72) / 2;
   const innerRadius = radius - strokeWidth / 2;
 
   if (!font || !subtitleFont) {
@@ -27,23 +31,35 @@ const CircularProgressBar = ({
   }
 
   const path = Skia.Path.Make();
-  path.addCircle(radius, radius, innerRadius);
+  path.addCircle(x, radius, innerRadius);
 
   const targetText = useDerivedValue(
     () => `${Math.round(percentage.value)}%`,
     [],
   );
 
-  const fontSize = font.measureText("00%");
-  const subtitleFontSize = subtitleFont.measureText("Sleep Fitness");
-
   const textX = useDerivedValue(() => {
     const _fontSize = font.measureText(targetText.value);
-    return radius - _fontSize.width / 2;
+    return x - radius + (radius * 2 - _fontSize.width) / 2;
+  }, []);
+
+  const textY = useDerivedValue(() => {
+    const percentageFontSize = font.measureText(targetText.value);
+    return radius + percentageFontSize.height / 2 - 20;
+  }, []);
+
+  const subtitleTextX = useDerivedValue(() => {
+    const _fontSize = subtitleFont.measureText("Sleep Fitness");
+    return x - radius + (radius * 2 - _fontSize.width) / 2;
+  }, []);
+
+  const subtitleTextY = useDerivedValue(() => {
+    const _fontSize = subtitleFont.measureText("Sleep Fitness");
+    return textY.value + _fontSize.height + 10;
   }, []);
 
   return (
-    <View style={{ width: radius * 2, height: radius * 2 }}>
+    <Box w="$full" h={radius * 2}>
       <Canvas style={styles.container}>
         <Path
           path={path}
@@ -65,22 +81,16 @@ const CircularProgressBar = ({
           start={0}
           end={end}
         />
+        <Text x={textX} y={textY} text={targetText} font={font} color="white" />
         <Text
-          x={textX}
-          y={radius + fontSize.height / 2}
-          text={targetText}
-          font={font}
-          color="white"
-        />
-        <Text
-          x={textX}
-          y={radius + subtitleFontSize.height / 2 + 40}
+          x={subtitleTextX}
+          y={subtitleTextY}
           text={"Sleep Fitness"}
           font={subtitleFont}
           color="white"
         />
       </Canvas>
-    </View>
+    </Box>
   );
 };
 

@@ -33,7 +33,7 @@ function SleepFitness({ score }: { score: SleepSession["score"] }) {
   const font = useFont(require("../../../../../../assets/Inter-Bold.ttf"), 64);
   const subtitleFont = useFont(
     require("../../../../../../assets/Inter-Bold.ttf"),
-    16,
+    18,
   );
 
   useEffect(() => {
