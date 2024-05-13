@@ -1,5 +1,5 @@
 import { Box, Text } from "@gluestack-ui/themed";
-import React, { useEffect } from "react";
+import React from "react";
 import { DatePicker } from "../../../shared/layout/components/DatePicker/DatePicker";
 import Header from "../../../shared/layout/components/Header";
 import Screen from "../../../shared/layout/components/Screen";
@@ -14,10 +14,6 @@ function Home() {
   const { currentUser, signOutUser } = useProfile();
   const { latestSessionDate } = useSessions(currentUser?.id);
   const { sessionData, syncSessionDataByDate } = useSelectedSession();
-
-  useEffect(() => {
-    console.log("sessionData", sessionData);
-  }, [sessionData]);
 
   return (
     <Screen>
