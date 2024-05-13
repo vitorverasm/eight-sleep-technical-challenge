@@ -1,11 +1,11 @@
-import { Card as GCard, Heading } from "@gluestack-ui/themed";
+import { Card as GCard } from "@gluestack-ui/themed";
+import { useFont } from "@shopify/react-native-skia";
 import { ComponentProps, useEffect } from "react";
+import { View } from "react-native";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 import CircularProgressBar from "../../../../../shared/layout/components/CircularProgressBar";
 import { SleepSession } from "../../../types/sleep-session";
 import { Wrapper } from "./Wrapper";
-import { useFont } from "@shopify/react-native-skia";
-import { View } from "react-native";
 
 function Card({
   children,
@@ -28,7 +28,6 @@ function Card({
 }
 
 function SleepFitness({ score }: { score: SleepSession["score"] }) {
-  console.log("score", score);
   const percentage = useSharedValue(0);
   const end = useSharedValue(0);
   const font = useFont(require("../../../../../../assets/Inter-Bold.ttf"), 64);
@@ -53,9 +52,6 @@ function SleepFitness({ score }: { score: SleepSession["score"] }) {
 
   return (
     <Card minHeight={"$56"} backgroundColor="$black">
-      <Heading mb="$1" size="md">
-        Sleep Fitness
-      </Heading>
       <CircularProgressBar
         radius={120}
         strokeWidth={8}
