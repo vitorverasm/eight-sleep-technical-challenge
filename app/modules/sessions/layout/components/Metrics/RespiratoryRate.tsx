@@ -2,7 +2,7 @@ import { Box, HStack, Heading, Text } from "@gluestack-ui/themed";
 import { useMemo } from "react";
 import { LineChart, lineDataItem } from "react-native-gifted-charts";
 import Card from "../../../../../shared/layout/components/Card";
-import { SleepSession } from "../../../types/sleep-session";
+import { SleepSession } from "../../../types/sleep-session.type";
 
 type RespiratoryRateProps = {
   respiratoryRateSeries: SleepSession["timeseries"]["respiratoryRate"];

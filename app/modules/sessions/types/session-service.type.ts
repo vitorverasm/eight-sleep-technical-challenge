@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { SleepSessionSchema } from "./sleep-session";
+import { SleepSessionSchema } from "./sleep-session.type";
 
 export const GetSessionsByUserIdParamsSchema = z.object({
   userId: z.string({}).optional(),

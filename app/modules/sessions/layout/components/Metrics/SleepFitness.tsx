@@ -4,7 +4,7 @@ import { View } from "react-native";
 import { useSharedValue, withTiming } from "react-native-reanimated";
 import Card from "../../../../../shared/layout/components/Card";
 import CircularProgressBar from "../../../../../shared/layout/components/CircularProgressBar";
-import { SleepSession } from "../../../types/sleep-session";
+import { SleepSession } from "../../../types/sleep-session.type";
 
 export function SleepFitness({ score }: { score: SleepSession["score"] }) {
   const percentage = useSharedValue(0);

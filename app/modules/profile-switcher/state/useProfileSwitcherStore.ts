@@ -1,7 +1,7 @@
 import type {} from "@redux-devtools/extension";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { User, UserSchema } from "../../user/types/user";
+import { User, UserSchema } from "../../user/types/user.type";
 import { useSessionDataStore } from "../../sessions/state/useSessionDataStore";
 
 interface ProfileSwitcherState {

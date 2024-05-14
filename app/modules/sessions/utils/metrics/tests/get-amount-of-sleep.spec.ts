@@ -1,4 +1,4 @@
-import { SleepSession } from "../../../types/sleep-session";
+import { SleepSession } from "../../../types/sleep-session.type";
 import { getAmountOfSleep } from "../get-amount-of-sleep";
 
 describe("getAmountOfSleep", () => {

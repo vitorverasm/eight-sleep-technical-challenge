@@ -1,5 +1,5 @@
 import { AmountOfSleep } from "../../types/amount-of-sleep.type";
-import { SleepSession } from "../../types/sleep-session";
+import { SleepSession } from "../../types/sleep-session.type";
 
 function getTotalSleepSeconds(sleepStages: SleepSession["stages"]): number {
   let totalLightSleep = 0;

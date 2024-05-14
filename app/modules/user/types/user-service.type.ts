@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { UserSchema } from "./user";
+import { UserSchema } from "./user.type";
 
 export const GetUsersResponseSchema = z.object({
   users: UserSchema.array().nonempty({

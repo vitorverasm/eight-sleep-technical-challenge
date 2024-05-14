@@ -1,4 +1,4 @@
-import { SleepStage } from "./sleep-stage";
+import { SleepStage } from "./sleep-stage.type";
 
 export type TimelineRecord = {
   stage: SleepStage["stage"];

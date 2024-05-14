@@ -4,7 +4,7 @@ import {
   GetSessionsByUserIdParamsSchema,
   GetSessionsByUserIdResponse,
   GetSessionsByUserIdResponseSchema,
-} from "../types/session-service";
+} from "../types/session-service.type";
 
 export async function getSessionsByUserId(params: GetSessionsByUserIdParams) {
   const paramsParse = GetSessionsByUserIdParamsSchema.safeParse(params);

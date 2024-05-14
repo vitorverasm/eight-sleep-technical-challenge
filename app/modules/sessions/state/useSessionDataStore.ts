@@ -1,7 +1,7 @@
 import type {} from "@redux-devtools/extension";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { SleepSession } from "../types/sleep-session";
+import { SleepSession } from "../types/sleep-session.type";
 
 interface SessionDataState {
   date: Date;

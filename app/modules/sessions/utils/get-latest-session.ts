@@ -1,4 +1,4 @@
-import { SleepSession } from "../types/sleep-session";
+import { SleepSession } from "../types/sleep-session.type";
 
 /**
  * getLatestSession

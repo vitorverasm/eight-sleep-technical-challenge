@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { SleepStageSchema } from "./sleep-stage";
-import { TimeSeriesSchema } from "./time-series";
+import { SleepStageSchema } from "./sleep-stage.type";
+import { TimeSeriesSchema } from "./time-series.type";
 
 export const SleepSessionSchema = z.object({
   /**

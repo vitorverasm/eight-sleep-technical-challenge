@@ -1,6 +1,6 @@
 import { Box, HStack, Heading, Text } from "@gluestack-ui/themed";
 import Card from "../../../../../shared/layout/components/Card";
-import { SleepStage } from "../../../types/sleep-stage";
+import { SleepStage } from "../../../types/sleep-stage.type";
 import { TimelineRecord } from "../../../types/timeline.type";
 
 type TimelineProps = {
