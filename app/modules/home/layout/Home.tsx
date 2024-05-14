@@ -13,6 +13,7 @@ import {
   getAmountOfSleep,
   getAverageAmountOfSleep,
 } from "../../sessions/utils/metrics/get-amount-of-sleep";
+import { getTimelineRecords } from "../../sessions/utils/metrics/get-timeline-records";
 
 function Home() {
   const { currentUser, signOutUser } = useProfile();
@@ -30,6 +31,13 @@ function Home() {
       return getAverageAmountOfSleep(sessions.map(session => session.stages));
     }
   }, [sessions]);
+
+  const timelineRecords = useMemo(() => {
+    if (sessionData?.ts && sessionData?.stages) {
+      const startedAt = new Date(sessionData.ts);
+      return getTimelineRecords(startedAt, sessionData?.stages);
+    }
+  }, [sessionData?.stages, sessionData?.ts]);
 
   return (
     <Screen>
@@ -55,6 +63,7 @@ function Home() {
                 amountOfSleep={amountOfSleep}
                 averageAmountOfSleep={averageAmountOfSleep}
               />
+              <Metrics.Timeline timelineRecords={timelineRecords} />
             </Metrics.Wrapper>
           ) : (
             <EmptyData />
