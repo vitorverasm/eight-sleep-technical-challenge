@@ -64,6 +64,9 @@ function Home() {
                 averageAmountOfSleep={averageAmountOfSleep}
               />
               <Metrics.Timeline timelineRecords={timelineRecords} />
+              <Metrics.SleepHeartRate
+                heartRateSeries={sessionData.timeseries.heartRate}
+              />
             </Metrics.Wrapper>
           ) : (
             <EmptyData />
