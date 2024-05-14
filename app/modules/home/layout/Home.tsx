@@ -1,5 +1,5 @@
 import { Box, Text } from "@gluestack-ui/themed";
-import React from "react";
+import React, { useMemo } from "react";
 import { DatePicker } from "../../../shared/layout/components/DatePicker/DatePicker";
 import Header from "../../../shared/layout/components/Header";
 import Screen from "../../../shared/layout/components/Screen";
@@ -9,11 +9,18 @@ import { useSelectedSession } from "../../sessions/hooks/useSelectedSession";
 import { useSessions } from "../../sessions/hooks/useSessions";
 import { EmptyData } from "../../sessions/layout/components/EmptyData";
 import Metrics from "../../sessions/layout/components/Metrics/Metrics";
+import { getAmountOfSleep } from "../../sessions/utils/metrics/get-amount-of-sleep";
 
 function Home() {
   const { currentUser, signOutUser } = useProfile();
   const { latestSessionDate } = useSessions(currentUser?.id);
   const { sessionData, syncSessionDataByDate } = useSelectedSession();
+
+  const amountOfSleep = useMemo(() => {
+    if (sessionData?.stages) {
+      return getAmountOfSleep(sessionData?.stages);
+    }
+  }, [sessionData?.stages]);
 
   return (
     <Screen>
@@ -35,12 +42,7 @@ function Home() {
           {sessionData ? (
             <Metrics.Wrapper>
               <Metrics.SleepFitness score={sessionData.score} />
-              <Metrics.TimeSlept
-                amountOfSleep={{
-                  hours: 8,
-                  minutes: 35,
-                }}
-              />
+              <Metrics.TimeSlept amountOfSleep={amountOfSleep} />
             </Metrics.Wrapper>
           ) : (
             <EmptyData />
