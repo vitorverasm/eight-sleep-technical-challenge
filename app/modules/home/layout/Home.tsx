@@ -67,6 +67,9 @@ function Home() {
               <Metrics.SleepHeartRate
                 heartRateSeries={sessionData.timeseries.heartRate}
               />
+              <Metrics.RespiratoryRate
+                respiratoryRateSeries={sessionData.timeseries.respiratoryRate}
+              />
             </Metrics.Wrapper>
           ) : (
             <EmptyData />

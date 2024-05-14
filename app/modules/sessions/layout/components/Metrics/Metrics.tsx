@@ -1,3 +1,4 @@
+import { RespiratoryRate } from "./RespiratoryRate";
 import { SleepFitness } from "./SleepFitness";
 import { SleepHeartRate } from "./SleepHeartRate";
 import { TimeSlept } from "./TimeSlept";
@@ -10,4 +11,5 @@ export default {
   TimeSlept,
   Timeline,
   SleepHeartRate,
+  RespiratoryRate,
 };

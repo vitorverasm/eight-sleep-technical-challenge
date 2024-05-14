@@ -4,51 +4,53 @@ import { LineChart, lineDataItem } from "react-native-gifted-charts";
 import Card from "../../../../../shared/layout/components/Card";
 import { SleepSession } from "../../../types/sleep-session";
 
-type SleepHeartRateProps = {
-  heartRateSeries: SleepSession["timeseries"]["heartRate"];
+type RespiratoryRateProps = {
+  respiratoryRateSeries: SleepSession["timeseries"]["respiratoryRate"];
 };
 
-export function SleepHeartRate({ heartRateSeries }: SleepHeartRateProps) {
-  const hours = [
-    new Date(heartRateSeries[0][0]).toLocaleTimeString("en-US", {
-      hour: "numeric",
-      minute: "numeric",
-      hour12: true,
-    }),
-    new Date(heartRateSeries[heartRateSeries.length - 1][0]).toLocaleTimeString(
-      "en-US",
-      {
+export function RespiratoryRate({
+  respiratoryRateSeries,
+}: RespiratoryRateProps) {
+  const hours = useMemo(
+    () => [
+      new Date(respiratoryRateSeries[0][0]).toLocaleTimeString("en-US", {
         hour: "numeric",
         minute: "numeric",
         hour12: true,
-      },
-    ),
-  ];
-  const heartRateValues: lineDataItem[] = useMemo(() => {
-    return heartRateSeries.map(hrItem => ({
-      value: hrItem[1],
-      dataPointText: `${Math.round(hrItem[1])}`,
+      }),
+      new Date(
+        respiratoryRateSeries[respiratoryRateSeries.length - 1][0],
+      ).toLocaleTimeString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }),
+    ],
+    [respiratoryRateSeries],
+  );
+
+  const respiratoryRateValues: lineDataItem[] = useMemo(() => {
+    return respiratoryRateSeries.map(rrItem => ({
+      value: rrItem[1],
+      dataPointText: `${Math.round(rrItem[1])}`,
     }));
-  }, [heartRateSeries]);
+  }, [respiratoryRateSeries]);
 
   const spacing = useMemo(() => {
-    if (heartRateSeries.length <= 5) {
+    if (respiratoryRateSeries.length <= 5) {
       return 60;
     }
     return 40;
-  }, [heartRateSeries.length]);
+  }, [respiratoryRateSeries.length]);
 
   const yAxisOffset = useMemo(() => {
-    if (heartRateSeries.length <= 5) {
-      return 80;
-    }
-    return 50;
-  }, [heartRateSeries.length]);
+    return 20;
+  }, []);
 
   return (
     <Card>
       <HStack alignItems="center" justifyContent="space-between">
-        <Heading>Sleeping heart rate</Heading>
+        <Heading>Sleeping respiratory rate</Heading>
         <Text size="xs">BPM</Text>
       </HStack>
       <Box mt={"$8"}>
@@ -61,7 +63,7 @@ export function SleepHeartRate({ heartRateSeries }: SleepHeartRateProps) {
           textShiftY={-8}
           textShiftX={-10}
           textFontSize={12}
-          data={heartRateValues}
+          data={respiratoryRateValues}
           color={"#fafafa"}
           dataPointsColor1="#fafafa"
           hideRules
