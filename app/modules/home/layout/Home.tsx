@@ -35,7 +35,12 @@ function Home() {
           {sessionData ? (
             <Metrics.Wrapper>
               <Metrics.SleepFitness score={sessionData.score} />
-              <Metrics.TimeSlept amountOfSleep={8} />
+              <Metrics.TimeSlept
+                amountOfSleep={{
+                  hours: 8,
+                  minutes: 35,
+                }}
+              />
             </Metrics.Wrapper>
           ) : (
             <EmptyData />
