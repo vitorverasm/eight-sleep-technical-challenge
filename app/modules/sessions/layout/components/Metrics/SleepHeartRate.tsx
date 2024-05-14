@@ -1,8 +1,8 @@
 import { Box, HStack, Heading, Text } from "@gluestack-ui/themed";
-import Card from "../../../../../shared/layout/components/Card";
-import { SleepSession } from "../../../types/sleep-session";
 import { useMemo } from "react";
 import { LineChart, lineDataItem } from "react-native-gifted-charts";
+import Card from "../../../../../shared/layout/components/Card";
+import { SleepSession } from "../../../types/sleep-session";
 
 type SleepHeartRateProps = {
   heartRateSeries: SleepSession["timeseries"]["heartRate"];
@@ -31,19 +31,36 @@ export function SleepHeartRate({ heartRateSeries }: SleepHeartRateProps) {
     }));
   }, [heartRateSeries]);
 
+  const spacing = useMemo(() => {
+    if (heartRateSeries.length <= 5) {
+      return 60;
+    }
+    return 40;
+  }, [heartRateSeries.length]);
+
+  const yAxisOffset = useMemo(() => {
+    if (heartRateSeries.length <= 5) {
+      return 80;
+    }
+    return 50;
+  }, [heartRateSeries.length]);
+
   return (
     <Card>
-      <Heading>Sleep heart rate</Heading>
+      <HStack alignItems="center" justifyContent="space-between">
+        <Heading>Sleep heart rate</Heading>
+        <Text size="xs">BPM</Text>
+      </HStack>
       <Box mt={"$8"}>
         <LineChart
           height={50}
           isAnimated
+          spacing={spacing}
           initialSpacing={15}
-          spacing={40}
           textColor1="white"
           textShiftY={-8}
           textShiftX={-10}
-          textFontSize={11}
+          textFontSize={12}
           data={heartRateValues}
           color={"#fafafa"}
           dataPointsColor1="#fafafa"
@@ -51,8 +68,8 @@ export function SleepHeartRate({ heartRateSeries }: SleepHeartRateProps) {
           disableScroll
           hideYAxisText
           hideAxesAndRules
-          yAxisOffset={50}
-          overflowTop={10}
+          yAxisOffset={yAxisOffset}
+          overflowTop={30}
         />
       </Box>
       <HStack
