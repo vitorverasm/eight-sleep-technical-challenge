@@ -30,6 +30,7 @@ export function Timeline({ timelineRecords }: TimelineProps) {
       <Box mt={"$4"} gap="$2" w="$full">
         {timelineRecords.map(record => (
           <HStack
+            key={record.date.getTime()}
             gap="$2"
             alignItems="center"
             w="$full"
