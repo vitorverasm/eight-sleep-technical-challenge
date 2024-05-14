@@ -5,6 +5,7 @@ export default function Card({
   children,
   backgroundColor,
   minHeight,
+  onLayout,
 }: {
   children: React.ReactNode;
 } & ComponentProps<typeof GCard>) {
@@ -15,6 +16,7 @@ export default function Card({
       w="$full"
       backgroundColor={backgroundColor ?? "$backgroundDark950"}
       minHeight={minHeight}
+      onLayout={onLayout}
     >
       {children}
     </GCard>
