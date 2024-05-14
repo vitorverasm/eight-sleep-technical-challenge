@@ -9,11 +9,14 @@ import { useSelectedSession } from "../../sessions/hooks/useSelectedSession";
 import { useSessions } from "../../sessions/hooks/useSessions";
 import { EmptyData } from "../../sessions/layout/components/EmptyData";
 import Metrics from "../../sessions/layout/components/Metrics/Metrics";
-import { getAmountOfSleep } from "../../sessions/utils/metrics/get-amount-of-sleep";
+import {
+  getAmountOfSleep,
+  getAverageAmountOfSleep,
+} from "../../sessions/utils/metrics/get-amount-of-sleep";
 
 function Home() {
   const { currentUser, signOutUser } = useProfile();
-  const { latestSessionDate } = useSessions(currentUser?.id);
+  const { latestSessionDate, sessions } = useSessions(currentUser?.id);
   const { sessionData, syncSessionDataByDate } = useSelectedSession();
 
   const amountOfSleep = useMemo(() => {
@@ -21,6 +24,12 @@ function Home() {
       return getAmountOfSleep(sessionData?.stages);
     }
   }, [sessionData?.stages]);
+
+  const averageAmountOfSleep = useMemo(() => {
+    if (sessions) {
+      return getAverageAmountOfSleep(sessions.map(session => session.stages));
+    }
+  }, [sessions]);
 
   return (
     <Screen>
@@ -42,7 +51,10 @@ function Home() {
           {sessionData ? (
             <Metrics.Wrapper>
               <Metrics.SleepFitness score={sessionData.score} />
-              <Metrics.TimeSlept amountOfSleep={amountOfSleep} />
+              <Metrics.TimeSlept
+                amountOfSleep={amountOfSleep}
+                averageAmountOfSleep={averageAmountOfSleep}
+              />
             </Metrics.Wrapper>
           ) : (
             <EmptyData />

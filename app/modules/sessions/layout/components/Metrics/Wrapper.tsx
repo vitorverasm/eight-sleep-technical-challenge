@@ -6,7 +6,7 @@ export function Wrapper({ children }: { children?: React.ReactNode }) {
     <Box w="$full" h="$full">
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ gap: 20 }}
+        contentContainerStyle={{ gap: 20, paddingBottom: 300 }}
       >
         {children}
       </ScrollView>
