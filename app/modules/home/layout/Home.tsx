@@ -1,5 +1,5 @@
 import { Box, Text } from "@gluestack-ui/themed";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { DatePicker } from "../../../shared/layout/components/DatePicker/DatePicker";
 import Header from "../../../shared/layout/components/Header";
 import { Logo } from "../../../shared/layout/components/Logo";
@@ -10,6 +10,8 @@ import { useSelectedSession } from "../../sessions/hooks/useSelectedSession";
 import { useSessions } from "../../sessions/hooks/useSessions";
 import { EmptyData } from "../../sessions/layout/components/EmptyData";
 import Metrics from "../../sessions/layout/components/Metrics/Metrics";
+import { SessionTabs } from "../../sessions/layout/components/SessionTabs";
+import { SessionTab } from "../../sessions/types/session-tab.enum";
 import {
   getAmountOfSleep,
   getAverageAmountOfSleep,
@@ -20,6 +22,8 @@ function Home() {
   const { currentUser, signOutUser } = useProfile();
   const { latestSessionDate, sessions } = useSessions(currentUser?.id);
   const { sessionData, syncSessionDataByDate } = useSelectedSession();
+
+  const [sessionTab, setSessionTab] = useState<SessionTab>(SessionTab.Sleep);
 
   useEffect(() => {
     syncSessionDataByDate(new Date());
@@ -60,30 +64,49 @@ function Home() {
           <DatePicker
             currentDate={new Date()}
             latestSessionDate={latestSessionDate}
-            onDateChange={date => syncSessionDataByDate(date)}
+            onDateChange={date => {
+              syncSessionDataByDate(date);
+              setSessionTab(SessionTab.Sleep);
+            }}
           />
         </Box>
         <Box pt="$5">
           {sessionData ? (
             <Metrics.Wrapper>
-              <Metrics.SleepFitness score={sessionData.score} />
-              <Metrics.TimeSlept
-                amountOfSleep={amountOfSleep}
-                averageAmountOfSleep={averageAmountOfSleep}
-              />
-              <Metrics.Timeline timelineRecords={timelineRecords} />
-              <Metrics.SleepHeartRate
-                heartRateSeries={sessionData.timeseries.heartRate}
-              />
-              <Metrics.RespiratoryRate
-                respiratoryRateSeries={sessionData.timeseries.respiratoryRate}
-              />
+              {sessionTab === SessionTab.Sleep ? (
+                <>
+                  <Metrics.SleepFitness score={sessionData.score} />
+                  <Metrics.TimeSlept
+                    amountOfSleep={amountOfSleep}
+                    averageAmountOfSleep={averageAmountOfSleep}
+                  />
+                  <Metrics.Timeline timelineRecords={timelineRecords} />
+                </>
+              ) : null}
+
+              {sessionTab === SessionTab.Health ? (
+                <>
+                  <Metrics.SleepHeartRate
+                    heartRateSeries={sessionData.timeseries.heartRate}
+                  />
+                  <Metrics.RespiratoryRate
+                    respiratoryRateSeries={
+                      sessionData.timeseries.respiratoryRate
+                    }
+                  />
+                </>
+              ) : null}
             </Metrics.Wrapper>
           ) : (
             <EmptyData />
           )}
         </Box>
       </Box>
+      <SessionTabs
+        isVisible={!!sessionData}
+        currentTab={sessionTab}
+        onTabPress={tab => setSessionTab(tab)}
+      />
     </Screen>
   );
 }
