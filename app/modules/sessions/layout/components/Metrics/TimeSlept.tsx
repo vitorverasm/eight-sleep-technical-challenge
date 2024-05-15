@@ -5,10 +5,10 @@ import { AmountOfSleep } from "../../../types/amount-of-sleep.type";
 export function TimeSlept({
   amountOfSleep,
   averageAmountOfSleep,
-}: {
+}: Readonly<{
   amountOfSleep?: AmountOfSleep;
   averageAmountOfSleep?: AmountOfSleep;
-}) {
+}>) {
   if (!amountOfSleep) {
     return (
       <Card>
