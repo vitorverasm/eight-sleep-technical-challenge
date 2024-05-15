@@ -10,7 +10,6 @@ import { sleepSessionMock } from "../../../sessions/tests/mocks/session-mock";
 import { SleepSession } from "../../../sessions/types/sleep-session.type";
 import { createPerson } from "../../../user/tests/mocks/user-mock";
 import Home from "../Home";
-import { getAmountOfSleep } from "../../../sessions/utils/metrics/get-amount-of-sleep";
 
 jest.mock("../../../sessions/layout/components/Metrics/SleepFitness", () => {
   const { View, Text } = jest.requireActual("react-native");
@@ -18,6 +17,7 @@ jest.mock("../../../sessions/layout/components/Metrics/SleepFitness", () => {
     SleepFitness: ({ score }: { score: SleepSession["score"] }) => (
       <View>
         <Text>{score}%</Text>
+        <Text>Sleep Fitness</Text>
       </View>
     ),
   };
@@ -44,10 +44,8 @@ const todayMock = new Date(sleepSessionMock.intervals[0].ts);
 jest.useFakeTimers();
 jest.setSystemTime(todayMock.getTime());
 
-beforeAll(() => {
-  httpServer.listen();
-  useProfileSwitcherStore.getState().signInUser(user1);
-});
+beforeAll(() => httpServer.listen());
+beforeEach(() => useProfileSwitcherStore.getState().signInUser(user1));
 afterEach(() => httpServer.resetHandlers());
 afterAll(() => httpServer.close());
 
@@ -73,8 +71,22 @@ describe("Home", () => {
         }),
       ),
     ).toBeOnTheScreen();
-    expect(screen.getByText("44%")).toBeOnTheScreen();
+  });
+
+  it("should render metrics", async () => {
+    render(
+      <TestWrapper>
+        <Home />
+      </TestWrapper>,
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText(`Hello ${user1?.name},`)).toBeOnTheScreen();
+    });
+    expect(screen.getByText("Sleep Fitness")).toBeOnTheScreen();
     expect(screen.getByText("Time Slept")).toBeOnTheScreen();
-    expect(screen.getByText("4h 55m")).toBeOnTheScreen();
+    expect(screen.getByText("Timeline")).toBeOnTheScreen();
+    expect(screen.getByText("Sleeping heart rate")).toBeOnTheScreen();
+    expect(screen.getByText("Sleeping respiratory rate")).toBeOnTheScreen();
   });
 });
