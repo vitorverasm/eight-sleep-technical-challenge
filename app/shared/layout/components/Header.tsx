@@ -25,6 +25,12 @@ const Title = styled(Heading, {
   verticalAlign: "middle",
 });
 
+const LogoContainer = styled(Box, {
+  flex: 5,
+  justifyContent: "center",
+  alignItems: "center",
+});
+
 const LeftIcon = (props: {
   onPress: ((event: GestureResponderEvent) => void) | undefined;
 }) => {
@@ -50,4 +56,4 @@ const Container = (props: ComponentProps<typeof HeaderContainer>) => {
   );
 };
 
-export default { Container, Title, LeftIcon };
+export default { Container, Title, LeftIcon, LogoContainer };

@@ -1,5 +1,6 @@
 import { Box, Text } from "@gluestack-ui/themed";
 import { FlatList } from "react-native";
+import { Logo } from "../../../shared/layout/components/Logo";
 import Screen from "../../../shared/layout/components/Screen";
 import Title from "../../../shared/layout/components/Title";
 import { useUsers } from "../../user/hooks/useUsers";
@@ -16,7 +17,7 @@ function ProfileSwitcher() {
       <Box p={"$4"} alignItems="center">
         <Title>Choose your profile</Title>
 
-        <Box mt={"$8"} width={"$full"} height="$full">
+        <Box mt={"$8"} width={"$full"} height={"$5/6"}>
           {isLoading && <Text>...Loading</Text>}
 
           {users && users?.length > 0 ? (
@@ -38,6 +39,9 @@ function ProfileSwitcher() {
               )}
             />
           ) : null}
+        </Box>
+        <Box alignItems="center" justifyContent="center">
+          <Logo />
         </Box>
       </Box>
     </Screen>
