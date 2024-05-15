@@ -33,6 +33,15 @@ or
 npm run ios
 ```
 
+### Setting up the environment (.env)
+You need to create a .env file in the root folder of the project, in order to run it properly. You can follow this example of .env:
+
+```.env
+EXPO_PUBLIC_API_URL=https://s3.amazonaws.com/eight-public/challenge
+```
+
+> PS: I'm sharing this since it's a public URL
+
 ### Scripts
 
 | Script          | Description                                         |
