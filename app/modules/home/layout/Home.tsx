@@ -1,5 +1,5 @@
 import { Box, Text } from "@gluestack-ui/themed";
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { DatePicker } from "../../../shared/layout/components/DatePicker/DatePicker";
 import Header from "../../../shared/layout/components/Header";
 import Screen from "../../../shared/layout/components/Screen";
@@ -19,6 +19,11 @@ function Home() {
   const { currentUser, signOutUser } = useProfile();
   const { latestSessionDate, sessions } = useSessions(currentUser?.id);
   const { sessionData, syncSessionDataByDate } = useSelectedSession();
+
+  useEffect(() => {
+    syncSessionDataByDate(new Date());
+    return () => {};
+  }, [syncSessionDataByDate]);
 
   const amountOfSleep = useMemo(() => {
     if (sessionData?.stages) {
