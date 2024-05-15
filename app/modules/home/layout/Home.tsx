@@ -96,6 +96,17 @@ function Home() {
                   />
                 </>
               ) : null}
+
+              {sessionTab === SessionTab.Temperature ? (
+                <>
+                  <Metrics.TemperatureInRoom
+                    temperatureInRoomSeries={sessionData.timeseries.tempRoomC}
+                  />
+                  <Metrics.TemperatureInBed
+                    temperatureInBedSeries={sessionData.timeseries.tempBedC}
+                  />
+                </>
+              ) : null}
             </Metrics.Wrapper>
           ) : (
             <EmptyData />

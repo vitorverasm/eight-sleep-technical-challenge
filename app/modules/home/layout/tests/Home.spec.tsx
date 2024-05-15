@@ -110,4 +110,22 @@ describe("Home", () => {
     });
     expect(screen.getByText("Sleeping respiratory rate")).toBeOnTheScreen();
   });
+
+  it("should render correct metrics on climate tab", async () => {
+    render(
+      <TestWrapper>
+        <Home />
+      </TestWrapper>,
+    );
+    const user = userEvent.setup();
+
+    await waitFor(() => {
+      expect(screen.getByText(`Hello ${user1?.name},`)).toBeOnTheScreen();
+    });
+    user.press(screen.getByTestId("session-tab-temperature"));
+    await waitFor(() => {
+      expect(screen.getByText("Temperature in room")).toBeOnTheScreen();
+    });
+    expect(screen.getByText("Temperature in bed")).toBeOnTheScreen();
+  });
 });
