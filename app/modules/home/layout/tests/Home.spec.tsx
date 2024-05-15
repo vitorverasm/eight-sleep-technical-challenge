@@ -1,4 +1,9 @@
-import { render, screen, waitFor } from "@testing-library/react-native";
+import {
+  render,
+  screen,
+  userEvent,
+  waitFor,
+} from "@testing-library/react-native";
 import { HttpResponse, http } from "msw";
 import { TestWrapper } from "../../../../shared/tests/mocks/TestWrapper";
 import {
@@ -73,7 +78,7 @@ describe("Home", () => {
     ).toBeOnTheScreen();
   });
 
-  it("should render metrics", async () => {
+  it("should render correct metrics on sleep tab", async () => {
     render(
       <TestWrapper>
         <Home />
@@ -86,7 +91,23 @@ describe("Home", () => {
     expect(screen.getByText("Sleep Fitness")).toBeOnTheScreen();
     expect(screen.getByText("Time Slept")).toBeOnTheScreen();
     expect(screen.getByText("Timeline")).toBeOnTheScreen();
-    expect(screen.getByText("Sleeping heart rate")).toBeOnTheScreen();
+  });
+
+  it("should render correct metrics on health tab", async () => {
+    render(
+      <TestWrapper>
+        <Home />
+      </TestWrapper>,
+    );
+    const user = userEvent.setup();
+
+    await waitFor(() => {
+      expect(screen.getByText(`Hello ${user1?.name},`)).toBeOnTheScreen();
+    });
+    user.press(screen.getByTestId("session-tab-health"));
+    await waitFor(() => {
+      expect(screen.getByText("Sleeping heart rate")).toBeOnTheScreen();
+    });
     expect(screen.getByText("Sleeping respiratory rate")).toBeOnTheScreen();
   });
 });

@@ -34,7 +34,10 @@ export function SessionTabs({
       }}
     >
       <HStack px="$2" alignItems="center" justifyContent="center" gap="$4">
-        <Tab.Button onPress={() => onTabPress(SessionTab.Sleep)}>
+        <Tab.Button
+          onPress={() => onTabPress(SessionTab.Sleep)}
+          testID="session-tab-sleep"
+        >
           <ButtonIcon
             as={BedDoubleIcon}
             color={currentTab === SessionTab.Sleep ? "#1862FF" : "$white"}
@@ -47,7 +50,10 @@ export function SessionTabs({
             Sleep
           </ButtonText>
         </Tab.Button>
-        <Tab.Button onPress={() => onTabPress(SessionTab.Health)}>
+        <Tab.Button
+          onPress={() => onTabPress(SessionTab.Health)}
+          testID="session-tab-health"
+        >
           <ButtonIcon
             as={HeartPulseIcon}
             color={currentTab === SessionTab.Health ? "#1862FF" : "$white"}
@@ -60,7 +66,10 @@ export function SessionTabs({
             Health
           </ButtonText>
         </Tab.Button>
-        <Tab.Button onPress={() => onTabPress(SessionTab.Temperature)}>
+        <Tab.Button
+          onPress={() => onTabPress(SessionTab.Temperature)}
+          testID="session-tab-temperature"
+        >
           <ButtonIcon
             as={ThermometerSnowflakeIcon}
             color={currentTab === SessionTab.Temperature ? "#1862FF" : "$white"}
