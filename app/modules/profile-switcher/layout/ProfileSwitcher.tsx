@@ -6,11 +6,13 @@ import Title from "../../../shared/layout/components/Title";
 import { useUsers } from "../../user/hooks/useUsers";
 import UserCard from "../../user/layout/components/UserCard";
 import { useProfile } from "../hooks/useProfile";
+import { useFavoritesStore } from "../state/useFavoritesStore";
 
 function ProfileSwitcher() {
   const { currentUser, signInUser } = useProfile();
 
   const { users, isLoading } = useUsers();
+  const { toggleFavorite, checkFavorite } = useFavoritesStore();
 
   return (
     <Screen>
@@ -26,6 +28,8 @@ function ProfileSwitcher() {
               data={users}
               renderItem={({ item: user }) => (
                 <UserCard.Card
+                  onFavoritePress={() => toggleFavorite(user.id)}
+                  isFavorite={checkFavorite(user.id)}
                   onPress={() => {
                     if (!currentUser) {
                       signInUser(user);
