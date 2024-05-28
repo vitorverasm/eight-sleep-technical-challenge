@@ -42,9 +42,10 @@ const Card = (
   props: ComponentProps<typeof CardContainer> & {
     onPress: ((event: GestureResponderEvent) => void) | null | undefined;
     isFavorite: boolean;
+    onFavoritePress?: () => void;
   },
 ) => {
-  const { isFavorite } = props;
+  const { isFavorite, onFavoritePress } = props;
   const [isPressed, setIsPressed] = useState(false);
 
   const isChecked = useMemo(
@@ -64,13 +65,7 @@ const Card = (
       >
         <HStack alignItems="center">
           <VStack flex={2}>{props.children}</VStack>
-          <Button
-            variant="link"
-            onPress={() => {
-              console.log("test");
-            }}
-            paddingRight={"$2"}
-          >
+          <Button variant="link" onPress={onFavoritePress} paddingRight={"$2"}>
             <ButtonIcon
               as={StarIcon}
               bgColor={isFavorite ? "$yellow500" : "transparent"}
