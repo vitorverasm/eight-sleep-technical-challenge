@@ -1,4 +1,14 @@
-import { Card as GCard, Heading, Text, styled } from "@gluestack-ui/themed";
+import {
+  Button,
+  ButtonIcon,
+  Card as GCard,
+  HStack,
+  Heading,
+  StarIcon,
+  Text,
+  VStack,
+  styled,
+} from "@gluestack-ui/themed";
 import { ComponentProps, useMemo, useState } from "react";
 import { GestureResponderEvent, Pressable } from "react-native";
 
@@ -50,7 +60,18 @@ const Card = (
         {...props}
         states={{ pressed: isPressed, checked: isChecked }}
       >
-        {props.children}
+        <HStack alignItems="center">
+          <VStack flex={2}>{props.children}</VStack>
+          <Button
+            variant="link"
+            onPress={() => {
+              console.log("test");
+            }}
+            paddingRight={"$2"}
+          >
+            <ButtonIcon as={StarIcon} color="$white" height={22} width={22} />
+          </Button>
+        </HStack>
       </CardContainer>
     </Pressable>
   );
