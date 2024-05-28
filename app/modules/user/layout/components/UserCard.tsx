@@ -41,8 +41,10 @@ const Description = styled(Text, {
 const Card = (
   props: ComponentProps<typeof CardContainer> & {
     onPress: ((event: GestureResponderEvent) => void) | null | undefined;
+    isFavorite: boolean;
   },
 ) => {
+  const { isFavorite } = props;
   const [isPressed, setIsPressed] = useState(false);
 
   const isChecked = useMemo(
@@ -69,7 +71,13 @@ const Card = (
             }}
             paddingRight={"$2"}
           >
-            <ButtonIcon as={StarIcon} color="$white" height={22} width={22} />
+            <ButtonIcon
+              as={StarIcon}
+              bgColor={isFavorite ? "$yellow500" : "transparent"}
+              color="$white"
+              height={22}
+              width={22}
+            />
           </Button>
         </HStack>
       </CardContainer>
