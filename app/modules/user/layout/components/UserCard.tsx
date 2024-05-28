@@ -68,8 +68,7 @@ const Card = (
           <Button variant="link" onPress={onFavoritePress} paddingRight={"$2"}>
             <ButtonIcon
               as={StarIcon}
-              bgColor={isFavorite ? "$yellow500" : "transparent"}
-              color="$white"
+              color={isFavorite ? "$yellow500" : "$white"}
               height={22}
               width={22}
             />
