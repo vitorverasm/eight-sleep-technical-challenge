@@ -11,9 +11,12 @@ export async function getSessionsByUserId(params: GetSessionsByUserIdParams) {
   if (paramsParse.success) {
     const { userId } = paramsParse.data;
 
-    const response = await fetch(`${Env.EXPO_PUBLIC_API_URL}/${userId}.json`, {
-      method: "GET",
-    });
+    const response = await fetch(
+      `${Env.EXPO_PUBLIC_API_URL}/${userId}/sessions`,
+      {
+        method: "GET",
+      },
+    );
     const data = (await response.json()) as GetSessionsByUserIdResponse;
 
     return GetSessionsByUserIdResponseSchema.parse(data).intervals;

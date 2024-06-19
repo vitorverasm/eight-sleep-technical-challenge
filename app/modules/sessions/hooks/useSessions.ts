@@ -5,7 +5,7 @@ import { getLatestSession } from "../utils/get-latest-session";
 
 export function useSessions(userId?: string) {
   const { data, error, isLoading } = useSWR(
-    `/${userId}.json`,
+    `/${userId}/sessions`,
     () =>
       getSessionsByUserId({
         userId,
