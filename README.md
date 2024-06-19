@@ -1,6 +1,6 @@
-## Eight Sleep - Technical Challenge (Family Mode)
+## My Sleep (family mode)
 
-This project provides a "Family mode" view of users sleep sessions.
+This project consists of a sleep tracker app with a "family mode". This project was designed along with a NodeJS Back-end application: [My Sleep(API)](https://github.com/vitorverasm/my-sleep-api.git).
 
 **Requirements:**
 
@@ -34,13 +34,11 @@ npm run ios
 ```
 
 ### Setting up the environment (.env)
-You need to create a .env file in the root folder of the project, in order to run it properly. You can follow this example of .env:
+As said before this project was designed to be used along the API project, so you need to [run the server](https://github.com/vitorverasm/my-sleep-api.git) in order to see data on the Mobile App. Then you need to create a .env file in the root folder of the project, in order to run it properly. You can follow this example of .env:
 
 ```.env
-EXPO_PUBLIC_API_URL=https://s3.amazonaws.com/eight-public/challenge
+EXPO_PUBLIC_API_URL=http://localhost:3000
 ```
-
-> PS: I'm sharing this since it's a public URL
 
 ### Scripts
 
