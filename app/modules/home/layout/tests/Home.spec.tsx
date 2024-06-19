@@ -32,12 +32,12 @@ const user1 = createPerson();
 const user2 = createPerson();
 
 const handlers = [
-  http.get(getMockServerUrl("/users.json"), () => {
+  http.get(getMockServerUrl("/users"), () => {
     return HttpResponse.json({
       users: [user1, user2],
     });
   }),
-  http.get(getMockServerUrl(`/${user1.id}.json`), () => {
+  http.get(getMockServerUrl(`/${user1.id}/sessions`), () => {
     return HttpResponse.json(sleepSessionMock);
   }),
 ];
