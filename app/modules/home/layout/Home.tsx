@@ -2,7 +2,6 @@ import { Box, Text } from "@gluestack-ui/themed";
 import React, { useEffect, useMemo, useState } from "react";
 import { DatePicker } from "../../../shared/layout/components/DatePicker/DatePicker";
 import Header from "../../../shared/layout/components/Header";
-import { Logo } from "../../../shared/layout/components/Logo";
 import Screen from "../../../shared/layout/components/Screen";
 import Title from "../../../shared/layout/components/Title";
 import { useProfile } from "../../profile-switcher/hooks/useProfile";
@@ -54,7 +53,7 @@ function Home() {
       <Header.Container>
         <Header.LeftIcon onPress={signOutUser} />
         <Header.LogoContainer>
-          <Logo />
+          <Header.Title>My Sleep</Header.Title>
         </Header.LogoContainer>
       </Header.Container>
       <Box px={"$5"} py={"$8"}>
