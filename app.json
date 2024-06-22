@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "eight-sleep-family-mode",
-    "slug": "eight-sleep-family-mode",
+    "name": "my-sleep-mobile",
+    "slug": "my-sleep-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
